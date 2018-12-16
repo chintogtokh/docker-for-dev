@@ -1,11 +1,16 @@
-# Docker for dev
+# Docker for Dev
 
-This is a simple dev environment using `docker-compose`. Essentially, it creates a nginx proxy that handles HTTPS and domain names and all that sorta stuff. Note that this is based on a Windows 10 environment.
+This is a simple dev environment using `docker-compose`. Essentially, it's a preconfigured jwilder/nginx-proxy that handles HTTPS and domain names and all that sorta stuff. Note that this is based on a Windows 10 environment.
 
-# Requirements
+# Prerequisites
 
 1. [Docker CE for Windows](https://docs.docker.com/docker-for-windows/install/)
 2. [Git Bash for Windows](https://gitforwindows.org/)
+
+# Assumptions
+* Windows 10
+* Chrome as browser
+* Use Git Bash in Admin mode
 
 # Setup
 
@@ -16,20 +21,22 @@ This is a simple dev environment using `docker-compose`. Essentially, it creates
   2. Under `Trusted Root Certification Authorities -> Certificates`, right click and select `All Tasks -> Import`.
   3. Using the wizard, add the generated `.crt` file in the `certs` directory under `Trusted Root Certification Authorities`.
 4. Run `docker-compose up -d`
-5. Now visit `https://example.me.local/`
+5. Now visit `https://example.me.local/`. It should have the trusted green thing.
 
 # Adding projects
 A project named "exampleweb" is included in the docker-compose file by default. Aside from the defaults, it just needs an exposed port and hostname, set as follows:
 
 ```
+project_name:
+	...
 	environment:
-      VIRTUAL_HOST: exampleweb.me.local
-      VIRTUAL_PORT: 80
-    expose:
-      - "80"
+	  VIRTUAL_HOST: projectname.me.local
+	  VIRTUAL_PORT: 80
+	expose:
+	  - "80"
 ```
 
-Run `add-to-hosts.sh` to add hostnames to the system `hosts` file. Only enter the subdomain here, it'll get appended with the value in `.env`.
+Run `add-to-hosts.sh` to add hostnames to the system `hosts` file. Only enter the subdomain here, it'll get appended with the `DOMAIN` value in `.env`.
 
 # Considerations
 * A single tld CA just isn't accepted by Chrome for some reason, such as `*.local`.
