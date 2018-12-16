@@ -17,9 +17,9 @@ This is a simple dev environment using `docker-compose`. Essentially, it's a pre
 1. Open up Git Bash so you have a nice bash terminal on Windows.
 2. Run `setup.sh`. You can change the variables in `.env` if you wish. By default, the SSL certs will be for `.me.local`.
 3. Make the generated certificate inside `certs` trusted, using the following:
-  1. Run `Ctrl+R` and type in `certmgr.msc`, and press enter.
-  2. Under `Trusted Root Certification Authorities -> Certificates`, right click and select `All Tasks -> Import`.
-  3. Using the wizard, add the generated `.crt` file in the `certs` directory under `Trusted Root Certification Authorities`.
+   1. Run `Ctrl+R` and type in `certmgr.msc`, and press enter.
+   2. Under `Trusted Root Certification Authorities -> Certificates`, right click and select `All Tasks -> Import`.
+   3. Using the wizard, add the generated `.crt` file in the `certs` directory under `Trusted Root Certification Authorities`.
 4. Run `docker-compose up -d`
 5. Now visit `https://example.me.local/`. It should have the trusted green thing.
 
@@ -28,12 +28,12 @@ A project named "exampleweb" is included in the docker-compose file by default. 
 
 ```
 project_name:
-	...
-	environment:
-	  VIRTUAL_HOST: projectname.me.local
-	  VIRTUAL_PORT: 80
-	expose:
-	  - "80"
+   ...
+   environment:
+      VIRTUAL_HOST: projectname.me.local
+      VIRTUAL_PORT: 80
+   expose:
+      - "80"
 ```
 
 Run `add-to-hosts.sh` to add hostnames to the system `hosts` file. Only enter the subdomain here, it'll get appended with the `DOMAIN` value in `.env`.
