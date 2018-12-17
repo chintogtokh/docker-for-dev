@@ -1,0 +1,22 @@
+version: "3"
+services:
+  web:
+    image: nginx:latest
+    expose:
+      - "80"
+    volumes:
+      - ./:/code
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+    links:
+      - php
+    environment:
+      VIRTUAL_HOST: php.me.local
+      VIRTUAL_PORT: 80
+  php:
+    image: php:7-fpm
+    volumes:
+      - ./:/code
+networks:
+  default:
+    external:
+      name: nginx-proxy

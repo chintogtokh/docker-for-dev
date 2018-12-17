@@ -38,9 +38,13 @@ project_name:
 
 Run `add-to-hosts.sh` to add hostnames to the system `hosts` file. Only enter the subdomain here, it'll get appended with the `DOMAIN` value in `.env`.
 
+A PHP project is also included in `example-php`. In that directory, just run `docker-compose up -d` and run the `add-to-hosts.sh` script and type in `php` as the hostname. That's it.
+
 # Considerations
 * A single tld CA just isn't accepted by Chrome for some reason, such as `*.local`.
 * `dev` is considered by Chrome to be an actual TLD, don't use it.
+* Git Bash has some issues when running Docker commands.
+  * The main one is exec-ing into the Docker container. The command used should be `winpty docker exec -it CONTAINER_ID //bin//bash`
 
 # References
 * https://dev.to/domysee/setting-up-a-reverse-proxy-with-nginx-and-docker-compose-29jg
